@@ -44,7 +44,7 @@ char *int_to_str(int count)
 	str += num;
 	*str = '\0';
 	str--;
-	while((count / 10) != 0)
+	while ((count / 10) != 0)
 	{
 		remainder = count % 10;
 		*str = remainder + 48;
@@ -54,4 +54,17 @@ char *int_to_str(int count)
 	remainder = count % 10;
 	*str = remainder + 48;
 	return (str);
+}
+/**
+  *env_err_handler - handles environent error
+  *@file: the file
+  *@message: the message to be passed
+  *Return: void
+  */
+void env_err_handler(char *file, char *message)
+{
+	write(STDERR_FILENO, file, _strlen(file));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, message, _strlen(message));
+	write(STDERR_FILENO, "\n", 1);
 }

@@ -3,15 +3,15 @@
 /**
 * tokenize - tokenizes our string
 *@buffer: the buffer
+*@separator: the separators
 *Return: returns the tokenized string
 */
 
-char **tokenize(char *buffer)
+char **tokenize(char *buffer, char *separator)
 {
-	char *separator = "\n\t ";
 	char *token, *str, *str_d;
 	char **tokens, *tmp;
-	int count = 0, index = 0, i = 0;
+	int count = 0, index = 0;
 
 	token = NULL;
 	tokens = NULL;
@@ -31,12 +31,12 @@ char **tokenize(char *buffer)
 		return (NULL);
 	}
 	tmp = buffer;
-	token = strtok(buffer, separator);
+	token = my_strtok(buffer, separator);
 	while (token != NULL)
 	{
 		str = strdup(token);
 		tokens[index++] = str;
-		token = strtok(NULL, separator);
+		token = my_strtok(NULL, separator);
 	}
 	tokens[index] = NULL;
 	free(tmp);
@@ -57,11 +57,11 @@ int count_token(char *buffer, char *separator)
 	tmp = buffer;
 	if (buffer == NULL)
 		return (0);
-	token = strtok(buffer, separator);
+	token = my_strtok(buffer, separator);
 	while (token)
 	{
 		count++;
-		token = strtok(NULL, separator);
+		token = my_strtok(NULL, separator);
 	}
 	free(tmp);
 	return (count);
