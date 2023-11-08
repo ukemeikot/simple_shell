@@ -3,7 +3,7 @@
 /**
 *free_mem - frees memory
 *@tokens: the tokens
-Return: nothing
+*Return: nothing
 */
 
 void free_mem(char **tokens)

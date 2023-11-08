@@ -37,6 +37,7 @@ void path_handler(char **tokens, char **env, int *status, char *file)
 		strcat(tmp, cmd);
 		if (stat(tmp, &buf) == 0)
 		{
+			free_mem(path_tokens);
 			free(tokens[0]);
 			tokens[0] = tmp;
 			handle_child(tokens, file, env, status);
@@ -46,7 +47,6 @@ void path_handler(char **tokens, char **env, int *status, char *file)
 		tmp = NULL;
 	}
 	error_handler(file, tokens[0], n);
-	free(tokens[0]);
 	free_mem(path_tokens);
 	*status = 127;
 }

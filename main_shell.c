@@ -17,6 +17,7 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 	int status = 0;
 
 	sep = "\n\t ";
+	environ = dynamic_env(env);
 	while (TRUE)
 	{
 		if (isatty(STDIN_FILENO))
@@ -32,6 +33,7 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 		if (rbyte == -1)
 		{
 			free(buffer);
+			free_mem(environ);
 			exit(EXIT_SUCCESS);
 		}
 		tokens = tokenize(buffer, sep);
@@ -40,5 +42,6 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 		path_handler(tokens, env, &status, argv[0]);
 		free_mem(tokens);
 	}
+	free_mem(environ);
 	return (status);
 }

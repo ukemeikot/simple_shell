@@ -14,7 +14,7 @@
 #include <signal.h>
 
 /*Macro definition of the shell prompt message*/
-#define PROMPT_M "($): "
+#define PROMPT_M "UK_FAITH$ "
 #define TRUE 1
 #define BUFFER 1024
 
@@ -30,11 +30,14 @@ int count_token(char *buffer, char *separator);
 char **tokenize(char *buffer, char *sep);
 void free_mem(char **tokens);
 void error_handler(char *file, char *arguments, int err_no);
-char *int_to_str(int count); void env_err_handler(char *file, char *message);
+char *int_to_str(int count);
+void env_err_handler(char *file, char *message);
 void env_err_handler(char *file, char *message);
 void path_handler(char **tokens, char **env, int *status, char *file);
 char *get_path(void);
 char *_strnstr(char *haystack, char *needle, int n);
+int handle_unsetenv(char **token, char *file, char **env, int *n);
+int handle_setenv(char **token, char *file, char **env, int *n);
 /**
  * struct builtin - blueprint for builtin command function pointer
  * @cmd: command
@@ -46,7 +49,11 @@ typedef struct builtin
 	char *cmd;
 	int (*builtin_func)(char **, char *, char **, int *);
 } builtin_cmd;
-
+int my_unsetenv(char *name);
+char *my_getenv(char *name);
+int set_env(char *name, char *value, int overwrite);
+char **dynamic_env(char **env);
+int my_putenv(char *new_env);
 int exit_handle(char **token, char *file, char **env, int *n);
 int builtin_command(char **tokens, char *filename, char **env, int *n);
 int _atoi(char *s);

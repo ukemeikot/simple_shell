@@ -25,6 +25,7 @@ void handle_child(char **tokens, char *file, char **env, int *ret_code)
 				perror(file);
 			else
 				error_handler(file, tokens[0], number);
+			free_mem(environ);
 			free_mem(tokens);
 			exit(EXIT_FAILURE);
 		}

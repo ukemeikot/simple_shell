@@ -14,13 +14,13 @@ int builtin_command(char **tokens, char *filename, char **env, int *n)
 	builtin_cmd builtin[] = {
 		{"exit", exit_handle},
 		{"env", env_handle},
-		/*{"setenv", setenv_handle},
-		{"unsetenv", unsetenv_handle},
-		{"cd", cd_handle},*/
+		{"setenv", handle_setenv},
+		{"unsetenv", handle_unsetenv},
+		/*{"cd", cd_handle},*/
 		{NULL, NULL}
 	};
 
-	builtin_len = 2;
+	builtin_len = 5;
 	for (i = 0; i < builtin_len && builtin[i].cmd != NULL;  i++)
 	{
 		if (strcmp(builtin[i].cmd, tokens[0]) == 0)
@@ -81,6 +81,7 @@ int exit_handle(char **token, char *file, char **env, int *n)
 	if (token[1] == NULL)
 	{
 		free_mem(token);
+		free_mem(environ);
 		exit(*n);
 	}
 	status = _atoi(token[1]);
@@ -93,6 +94,7 @@ int exit_handle(char **token, char *file, char **env, int *n)
 	else
 		*n = status;
 	free_mem(token);
+	free_mem(environ);
 	exit(*n);
 }
 
@@ -117,6 +119,7 @@ int env_handle(char **token, char *file, char **env, int *n)
 		{
 			*n = -1;
 			perror(file);
+			free_mem(token);
 			return (*n);
 		}
 		write(STDOUT_FILENO, "\n", 1);
