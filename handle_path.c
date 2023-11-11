@@ -16,7 +16,7 @@ void path_handler(char **tokens, char **env, int *status, char *file)
 
 	tmp = path = NULL;
 	path_tokens = NULL;
-	if (builtin_command(tokens, file, env, status) == 0)
+	if (builtin_command(tokens, file, env, status) != -50)
 		return;
 	if (stat(tokens[0], &buf) == 0)
 	{

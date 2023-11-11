@@ -15,17 +15,14 @@ int handle_setenv(char **token, char *file, char **env, int *n)
 	if (token[1] == NULL || (token[1] != NULL && token[2] == NULL))
 	{
 		env_err_handler(file, "Invalid argument");
-		free_mem(token);
 		return (*n);
 	}
 	if (set_env(token[1], token[2], 1) == -1)
 	{
 		env_err_handler(file, "Invalid argument");
-		free_mem(token);
 		*n = -1;
 		return (*n);
 	}
-	free_mem(token);
 	*n = 0;
 	return (*n);
 }
@@ -46,18 +43,14 @@ int handle_unsetenv(char **token, char *file, char **env, int *n)
 	if (token[1] == NULL)
 	{
 		env_err_handler(file, "Invalid argument");
-		free_mem(token);
-		*n = -1;
 		return (*n);
 	}
 	if (my_unsetenv(token[1]) == -1)
 	{
 		error_handler(file, token[0], *n);
-		free_mem(token);
 		*n = -1;
 		return (*n);
 	}
-	free_mem(token);
 	*n = 0;
 	return (*n);
 }
