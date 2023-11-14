@@ -29,12 +29,12 @@ char *my_getenv(char *name)
 int set_env(char *name, char *value, int overwrite)
 {
 	char *new_env;
-	int env_size;
+	int size;
 
 	if (name == NULL || value == NULL)
 		return (-1);
-	env_size = strlen(name) + strlen(value) + 2;
-	new_env = malloc(sizeof(char) * env_size);
+	size = strlen(name) + strlen(value) + 2;
+	new_env = malloc(sizeof(char) * size);
 	if (new_env == NULL)
 		return (-1);
 	strcpy(new_env, name);
@@ -70,37 +70,34 @@ int set_env(char *name, char *value, int overwrite)
 int my_putenv(char *new_env)
 {
 	int a, b;
-	char **env_array, *tmp, **tmp1;
+	char **array, *tmp, **tmp1;
 
-	a = 0;
-	while (environ[a])
-		a++;
-	env_array = malloc(sizeof(char *) * (a + 2));
-	if (env_array == NULL)
+	for (a = 0; environ[a] != NULL; a++)
+		;
+	array = malloc(sizeof(char *) * (a + 2));
+	if (array == NULL)
 	{
 		free(new_env);
 		return (-1);
 	}
-	a = 0;
-	while (environ[a])
+	for (a = 0; environ[a]; a++)
 	{
 		tmp = strdup(environ[a]);
 		if (tmp == NULL)
 		{
 			for (b = a - 1; b >= 0; b--)
-				free(env_array[b]);
-			free_mem(env_array);
+				free(array[b]);
+			free_mem(array);
 			free(new_env);
 			return (-1);
 		}
-		env_array[a] = tmp;
-		a++;
+		array[a] = tmp;
 	}
-	env_array[a] = new_env;
+	array[a] = new_env;
 	a++;
-	env_array[a] = NULL;
+	array[a] = NULL;
 	tmp1 = environ;
-	environ = env_array;
+	environ = array;
 	free_mem(tmp1);
 	return (0);
 }
