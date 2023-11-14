@@ -18,9 +18,9 @@ To exit the program, run the command
 
 	exit
 ## Supported Shell Commands
-*ls
-*cd
-*pwd
-*vim
-*echo
+* ls
+* cd
+* pwd
+* vim
+* echo
 And other supported commands.
