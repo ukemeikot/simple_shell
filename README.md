@@ -13,3 +13,6 @@ All the code is to be compiled using
 ## Execution
 	./hsh
 the program is to be executed with the above command.
+
+To exit the program, run the command
+	exit
