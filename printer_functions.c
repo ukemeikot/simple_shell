@@ -36,6 +36,15 @@ int char_print(char *charac)
  */
 void prompt_user(void)
 {
-	write(STDOUT_FILENO, PROMPT_M, _strlen(PROMPT_M));
+	size_t size;
+	char dir[300];
+	char pwd[200];
+
+	size = 200;
+	strcpy(dir, "uk_faith");
+	getcwd(pwd, size);
+	strcat(dir, pwd);
+	strcat(dir, "$ ");
+	write(STDOUT_FILENO, dir, _strlen(dir));
 }
 

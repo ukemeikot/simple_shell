@@ -16,11 +16,11 @@ int builtin_command(char **tokens, char *filename, char **env, int *n)
 		{"env", env_handle},
 		{"setenv", handle_setenv},
 		{"unsetenv", handle_unsetenv},
-		/*{"cd", cd_handle},*/
+		{"cd", cd_handle},
 		{NULL, NULL}
 	};
 
-	builtin_len = 5;
+	builtin_len = 6;
 	for (i = 0; i < builtin_len && builtin[i].cmd != NULL;  i++)
 	{
 		if (strcmp(builtin[i].cmd, tokens[0]) == 0)

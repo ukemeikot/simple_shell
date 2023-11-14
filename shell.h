@@ -12,7 +12,7 @@
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <signal.h>
-
+#include <string.h>
 /*Macro definition of the shell prompt message*/
 #define PROMPT_M "UK_FAITH$ "
 #define TRUE 1
@@ -24,6 +24,12 @@ void str_print(char *str, int newline);
 int char_print(char *charac);
 void prompt_user(void);
 void handle_child(char **tokens, char *file, char **env, int *ret_code);
+int cd_handle(char **tokens, char *dir_name, char **env, int *n);
+int cd_2_home(char *dir_name);
+char *my_getenv_val(char *name);
+void cd_error(char *dname, char **tokens, int err_n, char *msg);
+int cd_2_path(char *dir_name, char *path);
+int cd_previous(char *dir_name);
 /*Helper functions*/
 int _strlen(char *str);
 int count_token(char *buffer, char *separator);
