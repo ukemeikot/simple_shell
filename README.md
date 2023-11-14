@@ -24,3 +24,10 @@ To exit the program, run the command
 * vim
 * echo
 And other supported commands.
+
+## Shell Builtins
+	env
+-env variable
+	setenv name VALUE
+-sets environment variable
+
