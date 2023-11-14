@@ -17,3 +17,10 @@ the program is to be executed with the above command.
 To exit the program, run the command
 
 	exit
+## Supported Shell Commands
+*ls
+*cd
+*pwd
+*vim
+*echo
+And other supported commands.
