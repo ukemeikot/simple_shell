@@ -7,7 +7,7 @@ Our simple shell can interpret and execute command line arguments read from the 
 
 ## Usage
 All the code is to be compiled using
-	gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+		gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 ## Execution
 	./hsh
