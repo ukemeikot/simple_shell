@@ -30,7 +30,9 @@ char *my_getenv_val(char *name);
 void cd_error(char *dname, char **tokens, int err_n, char *msg);
 int cd_2_path(char *dir_name, char *path);
 int cd_previous(char *dir_name);
+int process_command(char **tokens, char **env, int *status, char *argv);
 /*Helper functions*/
+char *handle_sp_char(char **tokens);
 int _strlen(char *str);
 int count_token(char *buffer, char *separator);
 char **tokenize(char *buffer, char *sep);
@@ -40,6 +42,7 @@ char *int_to_str(int count);
 void env_err_handler(char *file, char *message);
 void env_err_handler(char *file, char *message);
 void path_handler(char **tokens, char **env, int *status, char *file);
+int flusher(char **tokens);
 char *get_path(void);
 char *_strnstr(char *haystack, char *needle, int n);
 int handle_unsetenv(char **token, char *file, char **env, int *n);
@@ -70,4 +73,6 @@ int overflow(int *d, int *b, char *bf, int *f, char *l, int *lp, size_t *s);
 unsigned int is_delim(char c, char *delim);
 char *my_strtok(char *str, char *delim);
 void helper(char **tokens, char *files, char **env, int *status, char *tmp);
+char *process_buf(char *buf);
+
 #endif
