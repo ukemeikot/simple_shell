@@ -31,6 +31,7 @@ void cd_error(char *dname, char **tokens, int err_n, char *msg);
 int cd_2_path(char *dir_name, char *path);
 int cd_previous(char *dir_name);
 int process_command(char **tokens, char **env, int *status, char *argv);
+int path_builder(char **pt, char **tk, char *file, int *status, char **env);
 /*Helper functions*/
 char *handle_sp_char(char **tokens);
 int _strlen(char *str);
