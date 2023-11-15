@@ -32,8 +32,6 @@ void path_handler(char **tokens, char **env, int *status, char *file)
 	path_tokens = tokenize(path, sep);
 	if (path_builder(path_tokens, tokens, file, status, env) == 0)
 		return;
-	if (!isatty(STDIN_FILENO))
-		n++;
 	error_handler(file, tokens[0], n);
 	free_mem(path_tokens);
 	*status = 127;
@@ -60,6 +58,8 @@ char *get_path(void)
 		else
 		{
 			path = path + 5;
+			if (path == NULL || *path != '/' || *path == '=')
+				return (NULL);
 			tmp = malloc(sizeof(char) * (_strlen(path) + 1));
 			strcpy(tmp, path);
 			return (tmp);
@@ -87,8 +87,8 @@ int path_builder(char **pt, char **tk, char *file, int *status, char **env)
 	tmp = NULL;
 	for (i = 0; pt[i]; i++)
 	{
-		len = _strlen(pt[i]) + _strlen(tk[0]) + 2;
-		tmp = malloc(sizeof(char) * len);
+		len = _strlen(pt[i]) + _strlen(tk[0]);
+		tmp = malloc(sizeof(char) * (len + 2));
 		if (tmp == NULL)
 			break;
 		strcpy(tmp, pt[i]);
